@@ -2,29 +2,38 @@
 
     MasterMind=(function(){
 
+        const arrayColores=["red","blue","green","yellow","orange","purple","pink","black","white"];
+        const NUM_COLORS=arrayColores.length;
+        const NUM_COLUMNS=4;
+        let linea;
+
         const init=function(){
-            let [...arrayGenerado]=this.generarArray();
-            this.mostrar.bind(arrayGenerado)();
+            linea=[];
+            generarArray();
+            mostrar();
         }
 
         const mostrar=function(){
-            console.log(this);
+            console.log(linea);
         }
+
         const comprobarConcidencia= function(intento){
             
+            let [...intento2]=intento;
             
-
-            //He ganado
-            return true;
+            return {
+                intento:intento2,
+                numBlancos: contarBlancos(intento),
+                numNegros: contarNegros(intento),
+                ganado: comprobarGanar
+            };
             
         }
         const generarArray= function(){
-            let arrayGenerado=[];
-            const arrayColores=["red","blue","green","yellow","orange","purple","pink","black","white"];
+            
             for(let i=0;i<4;i++){
-                arrayGenerado[i]=arrayColores[Math.floor(Math.random()*arrayColores.length)];
+                linea[i]=arrayColores[Math.floor(Math.random()*arrayColores.length)];
             }
-            return arrayGenerado;
         }
 
 
