@@ -1,54 +1,38 @@
 {
-    MasterMind = {
-        arrayActual:[],
-        arrayGenerado:[],
-        arrayColores:["red","blue","green","yellow","orange","purple","pink","black","white"],
-        numHuecos:4,
-        victoria:false,
-        init: function () {
-            this.generarArray();
-            this.mostrar();
 
-        },
-        mostrar: function () {
-            console.log(this.arrayGenerado);
-        },
-        comprobarConcidencia: function(intento){
-            let contador=0;
+    MasterMind=(function(){
 
-            for (let i = 0; i < intento.length; i++) {
-                if(intento[i] === this.arrayGenerado[i]){
-                    this.arrayActual[contador] = "black";
-                    contador++;
-                }
-            }
+        const init=function(){
+            let [...arrayGenerado]=this.generarArray();
+            this.mostrar.bind(arrayGenerado)();
+        }
 
-            for (let i = contador; i < intento.length; i++) {
-                if(this.arrayGenerado.indexOf(intento[i]) !== -1 && this.arrayGenerado.indexOf(intento[i]) !== i){
-                    this.arrayActual[contador] = "white";
-                    contador++;
-                }
-            }
+        const mostrar=function(){
+            console.log(this);
+        }
+        const comprobarConcidencia= function(intento){
             
-            for (let i = contador; i < intento.length; i++) {
-                this.arrayActual[contador]="";
-                contador++;
-            }
+            
 
-            for (let i = 0; i < this.arrayActual.length; i++) {
-                if(this.arrayActual[i] !== "black"){
-                    this.victoria = false;
-                    return false;
-                }
-            }
-            this.victoria=true;
+            //He ganado
             return true;
             
-        },
-        generarArray: function(){
-            for(let i=0;i<this.numHuecos;i++){
-                this.arrayGenerado[i]=this.arrayColores[Math.floor(Math.random()*this.arrayColores.length)];
+        }
+        const generarArray= function(){
+            let arrayGenerado=[];
+            const arrayColores=["red","blue","green","yellow","orange","purple","pink","black","white"];
+            for(let i=0;i<4;i++){
+                arrayGenerado[i]=arrayColores[Math.floor(Math.random()*arrayColores.length)];
             }
-        },
-    };
+            return arrayGenerado;
+        }
+
+
+        return{
+            init:init,
+            mostrar:mostrar,
+            comprobarConcidencia:comprobarConcidencia
+        };
+
+    })();
 }
