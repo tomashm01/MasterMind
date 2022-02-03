@@ -1,6 +1,8 @@
 {
-
-    let MasterMind=function(){
+    /**
+    * @author Tomas
+    */
+    let MasterMind=(function(){
 
         const arrayColores=["red","blue","green","yellow","orange","purple","pink","black","white"];
         let linea;
@@ -64,7 +66,7 @@
             comprobarConcidencia:comprobarConcidencia
         };
 
-    }();
+    })();
 
     //Para pruebas
     document.addEventListener("DOMContentLoaded",MasterMind.init);
