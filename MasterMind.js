@@ -5,24 +5,23 @@
     let MasterMind=(function(){
 
         const arrayColores=["red","blue","green","yellow","orange","purple","pink","black","white"];
-        let linea;
+        let intentoUsuario;
 
         const init=function(){
-            linea=[];
+            intentoUsuario=[];
             generarArray();
             mostrar();
         }
 
         const mostrar=function(){
-            console.log(linea);
+            console.log(intentoUsuario);
         }
 
         const contarBlancos = function(combinacionUsuario, combinacionGanadora) {
             let bolasBlancas = 0;
     
             combinacionUsuario.forEach(function(elemento) {
-                let indice = combinacionGanadora.indexOf(elemento);
-                if (indice != -1) bolasBlancas++;
+                if (combinacionGanadora.indexOf(elemento) != -1) bolasBlancas++;
             });
     
             return bolasBlancas;
@@ -43,7 +42,7 @@
     
         const comprobarConcidencia= function(intento){
             
-            let copiaLinea=linea.slice();
+            let copiaLinea=intentoUsuario.slice();
             let combinacionUsuario=intento.slice();
 
             return {
@@ -56,14 +55,15 @@
         const generarArray= function(){
             
             for(let i=0;i<4;i++){
-                linea[i]=arrayColores[Math.floor(Math.random()*arrayColores.length)];
+                intentoUsuario[i]=arrayColores[Math.floor(Math.random()*arrayColores.length)];
             }
         }
 
         return{
             init:init,
             mostrar:mostrar,
-            comprobarConcidencia:comprobarConcidencia
+            comprobarConcidencia:comprobarConcidencia,
+            colores: arrayColores
         };
 
     })();
