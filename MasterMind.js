@@ -33,7 +33,7 @@
             combinacionUsuario.forEach(function(elemento, indice) {
                 if (elemento == combinacionGanadora[indice]){
                     bolasNegras++;
-                    combinacionUsuario[indice] = null;
+                    combinacionUsuario[indice] = "";
                 }
             });
     
