@@ -1,4 +1,4 @@
-{
+
     /**
     * @author Tomas
     */
@@ -67,8 +67,3 @@
         };
 
     })();
-
-    //Para pruebas
-    document.addEventListener("DOMContentLoaded",MasterMind.init);
-    window.MasterMind=MasterMind;
-}

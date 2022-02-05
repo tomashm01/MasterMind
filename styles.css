@@ -1,0 +1,73 @@
+.bolas{
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:5px;
+    border: 3px solid black;
+}
+.bolitas{
+    width:20px;
+    height:20px;
+    border-radius: 50%;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    margin:5px;
+    border: 3px solid black;
+}
+.bolas:hover{
+    cursor:pointer;
+}
+main{
+    display:flex;
+    flex-direction:row;
+}
+#botones{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    margin:10px;
+    width:10%;
+}
+#botones #buttons{
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+}
+#interfaz{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:flex-end;
+    margin:10px;
+    width:70%;
+}
+#ganar:hover,#reset:hover{
+    cursor:pointer;
+}
+
+.oculto{
+    display:none;
+}
+
+#seleccion{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+}
+#pistas{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    margin:10px;
+    width:30%;
+}

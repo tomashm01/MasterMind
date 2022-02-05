@@ -6,10 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Tomás">
     <title>MasterMind</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="videojuego.js"></script>
     <script src="MasterMind.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
     <noscript>Please enable JavaScript!</noscript>
-
+    <div class="container">
+        <header>
+            <section class="oculto" id="tableroVictoria">
+                <h1>Has ganando</h1>
+                <button id="nuevaPartida">Nueva partida</button>
+            </section>
+    
+            <section id="intentos">
+                <p id="contador">Intentos: 0</p>
+            </section>
+        </header>
+        <main>
+            
+            <div id="botones">
+                <section id="listaBolas">
+                    <div class="bolas" id="red"></div>
+                    <div class="bolas" id="blue"></div>
+                    <div class="bolas" id="green"></div>
+                    <div class="bolas" id="yellow"></div>
+                    <div class="bolas" id="orange"></div>
+                    <div class="bolas" id="purple"></div>
+                    <div class="bolas" id="pink"></div>
+                    <div class="bolas" id="black"></div>
+                    <div class="bolas" id="white"></div>
+                </section>
+                <div id="buttons">
+                    <div><button id="ganar"><i class="material-icons">done</i></button></div>
+                    <div><button id="reset"><i class="material-icons">cached</i></button></div>
+                </div>
+            </div>
+    
+            <div id="interfaz">
+                <section id="seleccion">
+                    <div class="bolas bola1"></div>
+                    <div class="bolas bola2"></div>
+                    <div class="bolas bola3"></div>
+                    <div class="bolas bola4"></div>
+                </section>
+                <section id="pistas">
+                    <div class="bolitas"></div>
+                    <div class="bolitas"></div>
+                    <div class="bolitas"></div>
+                    <div class="bolitas"></div>
+                </section>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
