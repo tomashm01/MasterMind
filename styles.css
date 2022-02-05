@@ -57,17 +57,19 @@ main{
     display:none;
 }
 
-#seleccion{
-    display:flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items:center;
-}
-#pistas{
+#seleccion #filas{
     display:flex;
     flex-direction:row;
     justify-content:center;
     align-items:center;
     margin:10px;
-    width:30%;
+    height:70px;
+}
+#pistas #filas{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    margin:10px;
+    height:70px;
 }

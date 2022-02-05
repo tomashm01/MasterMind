@@ -3,6 +3,7 @@
      * @author: Tomás Hidalgo
      */    
     
+    
 
     const init=function(){
 
@@ -12,15 +13,18 @@
 
         MasterMind.init();
         let numBolas=1;
+        let linea=[];
+
+        ganar.addEventListener("click",comprobarVictoria);
+        reset.addEventListener("click",resetear);
 
         bolas.forEach(elemento=>{
 
             //Colorear y pintar las bolas
             pintarBolas.bind(elemento)();
-
             if(elemento.classList.contains(`bola${numBolas}`)){ //Hacer reset del color de las bolas del usuario
                 elemento.addEventListener("click",function(){
-                    this.style.backgroundColor="white";
+                    this.style.backgroundColor="none";
                 });
                 numBolas++;
             }else{ //Colorear bolas del tablero 
@@ -31,8 +35,16 @@
         
     }
 
-    const colorearTablero=function(){
+    const resetear=function(){
 
+    }
+
+    const comprobarVictoria=function(){
+        
+    }
+
+    const colorearTablero=function(){
+        let numBolas=1;
         
 
     }

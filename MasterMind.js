@@ -4,7 +4,7 @@
     */
     let MasterMind=(function(){
 
-        const arrayColores=["red","blue","green","yellow","orange","purple","pink","black","white"];
+        const arrayColores=["red","blue","green","yellow","orange","purple","pink","black"];
         let intentoUsuario;
 
         const init=function(){
