@@ -30,6 +30,22 @@
         let lineas=devolverLineas();
         intentos=0;
         document.getElementById("contador").innerHTML="Intentos: "+intentos;
+        let seleccion=document.getElementById("seleccion");
+        seleccion.innerHTML=`
+        <div id="filas">
+            <div class="bolas bola1"></div>
+            <div class="bolas bola2"></div>
+            <div class="bolas bola3"></div>
+            <div class="bolas bola4"></div>
+        </div>`;
+        let pistas=document.getElementById("pistas");
+        pistas.innerHTML=`
+        <div id="filas">
+            <div class="bolitas"></div>
+            <div class="bolitas"></div>
+            <div class="bolitas"></div>
+            <div class="bolitas"></div>
+        </div>`;
         for(linea of lineas){ 
             linea.style.backgroundColor="";
         }
@@ -58,8 +74,34 @@
         return linea;
     }
 
-    const addNewLine=function(){
+    const addNewLine=function(){ 
+        let div1=document.createElement("div");
+        let div2=document.createElement("div");
+        let section1=document.getElementById("seleccion");
+        let section2=document.getElementById("pistas");
 
+        let bolas=document.querySelectorAll(".bolas");
+        bolas.forEach(elemento=>{
+            elemento.classList.remove("bola1");
+            elemento.classList.remove("bola2");
+            elemento.classList.remove("bola3");
+            elemento.classList.remove("bola4");
+        });
+        
+        for(let i=1;i<5;i++){ //Bolas grandes
+            let divInterfaz=document.createElement("div");
+            divInterfaz.classList.add("bolas");
+            divInterfaz.classList.add(`bola${i}`);
+            div1.appendChild(divInterfaz);
+        }
+        section1.insertAdjacentHTML('afterbegin',`<div id="filas">${div1.innerHTML}</div>`);
+
+        for(let i=0;i<4;i++){//Bolas pequeñas
+            let divInterfaz=document.createElement("div");
+            divInterfaz.classList.add("bolitas");
+            div2.appendChild(divInterfaz);
+        }
+        section2.insertAdjacentHTML('afterbegin',`<div id="filas">${div2.innerHTML}</div>`);
     }
 
     const comprobarVictoria=function(){
