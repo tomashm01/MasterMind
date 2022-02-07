@@ -30,6 +30,7 @@
         let lineas=devolverLineas();
         intentos=0;
         document.getElementById("contador").innerHTML="Intentos: "+intentos;
+
         let seleccion=document.getElementById("seleccion");
         seleccion.innerHTML=`
         <div id="filas">
@@ -38,14 +39,16 @@
             <div class="bolas bola3"></div>
             <div class="bolas bola4"></div>
         </div>`;
+
         let pistas=document.getElementById("pistas");
         pistas.innerHTML=`
         <div id="filas">
-            <div class="bolitas"></div>
-            <div class="bolitas"></div>
-            <div class="bolitas"></div>
-            <div class="bolitas"></div>
+            <div class="bolitas actual"></div>
+            <div class="bolitas actual"></div>
+            <div class="bolitas actual"></div>
+            <div class="bolitas actual"></div>
         </div>`;
+
         for(linea of lineas){ 
             linea.style.backgroundColor="";
         }
@@ -88,6 +91,11 @@
             elemento.classList.remove("bola4");
         });
         
+        let bolitas=document.querySelectorAll(".bolitas");
+        bolitas.forEach(elemento=>{
+            elemento.classList.remove("actual");
+        });
+        
         for(let i=1;i<5;i++){ //Bolas grandes
             let divInterfaz=document.createElement("div");
             divInterfaz.classList.add("bolas");
@@ -99,6 +107,7 @@
         for(let i=0;i<4;i++){//Bolas pequeñas
             let divInterfaz=document.createElement("div");
             divInterfaz.classList.add("bolitas");
+            divInterfaz.classList.add("actual");
             div2.appendChild(divInterfaz);
         }
         section2.insertAdjacentHTML('afterbegin',`<div id="filas">${div2.innerHTML}</div>`);
@@ -115,6 +124,7 @@
             alert("Has ganado");
             return true;
         }
+        pintarBolitas(bolas);
         addNewLine();
 
         intentos++;
@@ -134,6 +144,37 @@
             }
         }
 
+    }
+
+    const obtenerBolitasActuales=function(elemento){
+        return elemento.classList.contains("actual");
+    }
+
+    const pintarBolitas=function(bolas){
+        let bolitas=document.querySelectorAll(".bolitas");
+        if(bolas.bolasNegras==0 && bolas.bolasBlancas==0) return false;
+        let bolitasActuales=[];
+
+        for(let i=0;i<bolitas.length;i++){
+            if(bolitas[i].classList.contains("actual")){
+                bolitasActuales.push(bolitas[i]);
+            }
+        }
+        let posicion=0;
+
+        for(let i=0;i<bolas.bolasNegras;i++){
+            bolitasActuales[posicion].style.backgroundColor="black";
+            posicion++;
+        }
+
+        if(bolas.bolasBlancas==0) return false;
+
+        for(let i=0;i<bolas.bolasNegras;i++){
+            bolitasActuales[posicion].style.backgroundColor="white";
+            posicion++;
+        }
+
+        return true;
     }
 
     const pintarBolas=function(){

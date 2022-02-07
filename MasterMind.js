@@ -31,7 +31,7 @@
             let bolasNegras = 0;
     
             combinacionUsuario.forEach(function(elemento, indice) {
-                if (elemento == combinacionGanadora[indice]){
+                if (elemento.style.backgroundColor== combinacionGanadora[indice]){
                     bolasNegras++;
                     combinacionUsuario[indice] = "";
                 }
