@@ -59,7 +59,7 @@
         
         if(this.classList.contains("bola1")|| this.classList.contains("bola2")|| this.classList.contains("bola3")|| this.classList.contains("bola4")){ //Reset bola al clickar
             this.style.backgroundColor="";
-        }else{ //Colorear bola al clickar
+        }else if(this.classList.contains("bolaLateral")){ //Colorear bola al clickar
             colorearTablero.bind(this)();
         }
     }
@@ -75,6 +75,10 @@
             }
         });
         return linea;
+    }
+
+    const borrarColor=function(){
+        this.style.backgroundColor="";
     }
 
     const addNewLine=function(){ 
@@ -119,9 +123,11 @@
         for(linea of lineas){
             if(linea.style.backgroundColor=="") return false; 
         }
-        bolas=MasterMind.comprobarConcidencia(lineas);
+        let bolas=MasterMind.comprobarConcidencia(lineas);
         if(bolas.bolasNegras==4){
             alert("Has ganado");
+            resetear();
+            MasterMind.init();
             return true;
         }
         pintarBolitas(bolas);
@@ -146,10 +152,6 @@
 
     }
 
-    const obtenerBolitasActuales=function(elemento){
-        return elemento.classList.contains("actual");
-    }
-
     const pintarBolitas=function(bolas){
         let bolitas=document.querySelectorAll(".bolitas");
         if(bolas.bolasNegras==0 && bolas.bolasBlancas==0) return false;
@@ -169,7 +171,7 @@
 
         if(bolas.bolasBlancas==0) return false;
 
-        for(let i=0;i<bolas.bolasNegras;i++){
+        for(let i=0;i<bolas.bolasBlancas;i++){
             bolitasActuales[posicion].style.backgroundColor="white";
             posicion++;
         }
@@ -180,7 +182,6 @@
     const pintarBolas=function(){
         this.style.backgroundColor=this.id;
     }
-
     
     document.addEventListener("DOMContentLoaded", init);
 }

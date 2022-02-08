@@ -17,11 +17,15 @@
             console.log(intentoUsuario);
         }
 
-        const contarBlancos = function(combinacionUsuario, combinacionGanadora) {
+        let contarBlancos = function(combinacionUsuario, combinacionGanadora) {
             let bolasBlancas = 0;
     
             combinacionUsuario.forEach(function(elemento) {
-                if (combinacionGanadora.indexOf(elemento) != -1) bolasBlancas++;
+                let indice = combinacionGanadora.indexOf(elemento.style.backgroundColor);
+                if (indice != -1) {
+                    bolasBlancas++;
+                    combinacionGanadora[indice] = "";
+                }
             });
     
             return bolasBlancas;
@@ -33,7 +37,7 @@
             combinacionUsuario.forEach(function(elemento, indice) {
                 if (elemento.style.backgroundColor== combinacionGanadora[indice]){
                     bolasNegras++;
-                    combinacionUsuario[indice] = "";
+                    combinacionGanadora[indice] = "";
                 }
             });
     
@@ -46,8 +50,8 @@
             let combinacionUsuario=intento.slice();
 
             return {
-                bolasNegras: contarNegros(combinacionUsuario,copiaLinea),
-                bolasBlancas: contarBlancos(combinacionUsuario,copiaLinea)
+                bolasNegras: contarNegros(combinacionUsuario, copiaLinea),
+                bolasBlancas: contarBlancos(combinacionUsuario, copiaLinea)
             };
             
         }
