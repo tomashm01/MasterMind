@@ -49,14 +49,17 @@ main{
     align-items:flex-end;
     margin:10px;
     width:70%;
-    
 }
 .scroll{
     scroll-snap-type: y mandatory;
     overflow-x:hidden;
     overflow-y:scroll; 
+    height:400px;
+    
 }
-
+.scroll section{
+    height:100%;
+}
 #ganar:hover,#reset:hover{
     cursor:pointer;
 }
