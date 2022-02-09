@@ -130,21 +130,22 @@
         
         let lineas=devolverLineas();
         for(linea of lineas){
-            if(linea.style.backgroundColor=="") return false; 
+            if(linea.style.backgroundColor=="") return  
         }
         let bolas=MasterMind.comprobarConcidencia(lineas);
+        pintarBolitas(bolas);
+
         if(bolas.bolasNegras==4){
             alert("Has ganado");
             resetear();
             MasterMind.init(e);
-            return true;
+            return 
         }
-        pintarBolitas(bolas);
+
         addNewLine();
 
         intentos++;
         document.getElementById("contador").innerHTML="Intentos: "+intentos;
-        return false;
     }
 
     const colorearTablero=function(){
@@ -163,7 +164,7 @@
 
     const pintarBolitas=function(bolas){
         let bolitas=document.querySelectorAll(".bolitas");
-        if(bolas.bolasNegras==0 && bolas.bolasBlancas==0) return false;
+        if(bolas.bolasNegras==0 && bolas.bolasBlancas==0) return 
         let bolitasActuales=[];
 
         for(let i=0;i<bolitas.length;i++){
@@ -178,14 +179,13 @@
             posicion++;
         }
 
-        if(bolas.bolasBlancas==0) return false;
+        if(bolas.bolasBlancas==0) return 
 
         for(let i=0;i<bolas.bolasBlancas;i++){
             bolitasActuales[posicion].style.backgroundColor="white";
             posicion++;
         }
 
-        return true;
     }
 
     const pintarBolas=function(){

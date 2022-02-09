@@ -21,16 +21,20 @@
             let bolasBlancas = 0;
     
             try{
-                combinacionUsuario.forEach(function(elemento, indice) {
-                    if (elemento.style.backgroundColor== combinacionGanadora[indice]){
-                        bolasNegras++;
+                combinacionUsuario.forEach(function(elemento) {
+                    if (combinacionGanadora.indexOf(elemento) != -1) bolasBlancas++;
+                    let indice = combinacionGanadora.indexOf(elemento.style.backgroundColor);
+                    if (indice != -1) {
+                        bolasBlancas++;
                         combinacionGanadora[indice] = "";
                     }
                 });
             }catch(e){
-                combinacionUsuario.forEach(function(elemento, indice) {
-                    if (elemento== combinacionGanadora[indice]){
-                        bolasNegras++;
+                combinacionUsuario.forEach(function(elemento) {
+                    if (combinacionGanadora.indexOf(elemento) != -1) bolasBlancas++;
+                    let indice = combinacionGanadora.indexOf(elemento.style.backgroundColor);
+                    if (indice != -1) {
+                        bolasBlancas++;
                         combinacionGanadora[indice] = "";
                     }
                 });
