@@ -20,13 +20,21 @@
         let contarBlancos = function(combinacionUsuario, combinacionGanadora) {
             let bolasBlancas = 0;
     
-            combinacionUsuario.forEach(function(elemento) {
-                let indice = combinacionGanadora.indexOf(elemento.style.backgroundColor);
-                if (indice != -1) {
-                    bolasBlancas++;
-                    combinacionGanadora[indice] = "";
-                }
-            });
+            try{
+                combinacionUsuario.forEach(function(elemento, indice) {
+                    if (elemento.style.backgroundColor== combinacionGanadora[indice]){
+                        bolasNegras++;
+                        combinacionGanadora[indice] = "";
+                    }
+                });
+            }catch(e){
+                combinacionUsuario.forEach(function(elemento, indice) {
+                    if (elemento== combinacionGanadora[indice]){
+                        bolasNegras++;
+                        combinacionGanadora[indice] = "";
+                    }
+                });
+            }
     
             return bolasBlancas;
         }
@@ -34,12 +42,21 @@
         const contarNegros = function(combinacionUsuario, combinacionGanadora) {
             let bolasNegras = 0;
     
-            combinacionUsuario.forEach(function(elemento, indice) {
-                if (elemento.style.backgroundColor== combinacionGanadora[indice]){
-                    bolasNegras++;
-                    combinacionGanadora[indice] = "";
-                }
-            });
+            try{
+                combinacionUsuario.forEach(function(elemento, indice) {
+                    if (elemento.style.backgroundColor== combinacionGanadora[indice]){
+                        bolasNegras++;
+                        combinacionGanadora[indice] = "";
+                    }
+                });
+            }catch(e){
+                combinacionUsuario.forEach(function(elemento, indice) {
+                    if (elemento== combinacionGanadora[indice]){
+                        bolasNegras++;
+                        combinacionGanadora[indice] = "";
+                    }
+                });
+            }
     
             return bolasNegras;
         }
