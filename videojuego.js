@@ -3,8 +3,9 @@
      * @author: Tomás Hidalgo
      */    
     let intentos=0;
+    let existeScroll=false;
 
-    const init=function(){
+    const init=function(e){
 
         let bolas=document.querySelectorAll(".bolas");
         let ganar=document.getElementById("ganar");
@@ -77,15 +78,17 @@
         return linea;
     }
 
-    const borrarColor=function(){
-        this.style.backgroundColor="";
-    }
-
     const addNewLine=function(){ 
         let div1=document.createElement("div");
         let div2=document.createElement("div");
         let section1=document.getElementById("seleccion");
         let section2=document.getElementById("pistas");
+        let interfaz=document.getElementById("interfaz");
+
+        if(interfaz.childNodes[1].childNodes.length>4 && !existeScroll){
+            interfaz.classList.add("scroll");
+            existeScroll=true;
+        }
 
         let bolas=document.querySelectorAll(".bolas");
         bolas.forEach(elemento=>{
@@ -103,9 +106,15 @@
         for(let i=1;i<5;i++){ //Bolas grandes
             let divInterfaz=document.createElement("div");
             divInterfaz.classList.add("bolas");
-            divInterfaz.classList.add(`bola${i}`);
+            divInterfaz.classList.add(`bola${i}`);            
             div1.appendChild(divInterfaz);
+            interfaz.addEventListener("click",function(e){
+                if(e.target.classList.contains(`bola${i}`) && e.target.style.backgroundColor!=""){
+                    e.target.style.backgroundColor="";
+                }
+            });
         }
+        
         section1.insertAdjacentHTML('afterbegin',`<div id="filas">${div1.innerHTML}</div>`);
 
         for(let i=0;i<4;i++){//Bolas pequeñas
@@ -117,7 +126,7 @@
         section2.insertAdjacentHTML('afterbegin',`<div id="filas">${div2.innerHTML}</div>`);
     }
 
-    const comprobarVictoria=function(){
+    const comprobarVictoria=function(e){
         
         let lineas=devolverLineas();
         for(linea of lineas){
@@ -127,7 +136,7 @@
         if(bolas.bolasNegras==4){
             alert("Has ganado");
             resetear();
-            MasterMind.init();
+            MasterMind.init(e);
             return true;
         }
         pintarBolitas(bolas);
