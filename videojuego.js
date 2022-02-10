@@ -30,6 +30,8 @@
     const resetear=function(){
         let lineas=devolverLineas();
         intentos=0;
+        existeScroll=false;
+        document.getElementById("interfaz").classList.remove("scroll");
         document.getElementById("contador").innerHTML="Intentos: "+intentos;
 
         let seleccion=document.getElementById("seleccion");
