@@ -10,8 +10,7 @@
         let $bolas=$(".bolas");
         let $ganar=$("#ganar");
         let $reset=$("#reset");
-        $("#contador").html="Intentos "+ intentos;
-        //document.getElementById("contador").innerHTML="Intentos: "+intentos;
+        $("#contador").text(()=>"Intentos: "+intentos);
 
         MasterMind.init();
 
@@ -31,26 +30,26 @@
         let lineas=devolverLineas();
         intentos=0;
         existeScroll=false;
-        document.getElementById("interfaz").classList.remove("scroll");
-        document.getElementById("contador").innerHTML="Intentos: "+intentos;
 
-        let seleccion=document.getElementById("seleccion");
-        seleccion.innerHTML=`
-        <div id="filas">
-            <div class="bolas bola1"></div>
-            <div class="bolas bola2"></div>
-            <div class="bolas bola3"></div>
-            <div class="bolas bola4"></div>
-        </div>`;
+        $("interfaz").removeClass("scroll");
+        $("#contador").text(()=>"Intentos: "+intentos);
 
-        let pistas=document.getElementById("pistas");
-        pistas.innerHTML=`
-        <div id="filas">
-            <div class="bolitas actual"></div>
-            <div class="bolitas actual"></div>
-            <div class="bolitas actual"></div>
-            <div class="bolitas actual"></div>
-        </div>`;
+        let seleccion=$("#seleccion")
+                        .html(`
+                            <div id="filas">
+                                <div class="bolas bola1"></div>
+                                <div class="bolas bola2"></div>
+                                <div class="bolas bola3"></div>
+                                <div class="bolas bola4"></div>
+                            </div>`);
+        let pistas=$("#pistas")
+                        .html(`
+                            <div id="filas">
+                                <div class="bolitas actual"></div>
+                                <div class="bolitas actual"></div>
+                                <div class="bolitas actual"></div>
+                                <div class="bolitas actual"></div>
+                            </div>`);
 
         for(linea of lineas){ 
             linea.style.backgroundColor="";
@@ -81,61 +80,52 @@
     }
 
     const addNewLine=function(){ 
-        let div1=document.createElement("div");
-        let div2=document.createElement("div");
-        let section1=document.getElementById("seleccion");
-        let section2=document.getElementById("pistas");
-        let interfaz=document.getElementById("interfaz");
+        let div1,div2=$("<div></div>");
+        let section1=$("#seleccion");
+        let section2=$("#pistas");
+        let interfaz=$("#interfaz");
 
-        if(interfaz.childNodes[1].childNodes.length>4 && !existeScroll){
-            interfaz.classList.add("scroll");
+        if(interfaz.children()[1].childNodes.length>4 && !existeScroll){
+            interfaz.addClass("scroll");
             existeScroll=true;
         }
 
-        let bolas=document.querySelectorAll(".bolas");
-        bolas.forEach(elemento=>{
-            elemento.classList.remove("bola1");
-            elemento.classList.remove("bola2");
-            elemento.classList.remove("bola3");
-            elemento.classList.remove("bola4");
-        });
+        $(".bolas")
+            .each(function(){
+                $(this).removeClass("bola1 bola2 bola3 bola4");
+            });
+        $(".bolitas")
+            .each(function(){
+                $(this).removeClass("actual");
+            });
         
-        let bolitas=document.querySelectorAll(".bolitas");
-        bolitas.forEach(elemento=>{
-            elemento.classList.remove("actual");
-        });
         
         for(let i=1;i<5;i++){ //Bolas grandes
-            let divInterfaz=document.createElement("div");
-            divInterfaz.classList.add("bolas");
-            divInterfaz.classList.add(`bola${i}`);            
-            div1.appendChild(divInterfaz);
-            interfaz.addEventListener("click",function(e){
-                if(e.target.classList.contains(`bola${i}`) && e.target.style.backgroundColor!=""){
-                    e.target.style.backgroundColor="";
+            $("<div></div>").addClass(`bolas bola${i}`).appendTo(div1);
+            interfaz.click(function(e){
+                if($(e.target).hasClass(`bola${i}`) && $(e.target).css("backgroundColor")!="rgb(255, 255, 255)"){
+                    $(e.target).css("backgroundColor","rgb(255, 255, 255)");
                 }
             });
         }
-        
-        section1.insertAdjacentHTML('afterbegin',`<div id="filas">${div1.innerHTML}</div>`);
+        div1.html(`<div id="filas">${div1.text()}</div>`).insertAfter(section1);
+        //section1.insertAdjacentHTML('afterbegin',`<div id="filas">${div1.html()}</div>`);
 
         for(let i=0;i<4;i++){//Bolas pequeñas
-            let divInterfaz=document.createElement("div");
-            divInterfaz.classList.add("bolitas");
-            divInterfaz.classList.add("actual");
-            div2.appendChild(divInterfaz);
+            $("<div></div>").addClass(`bolitas`).appendTo(div2);
         }
-        section2.insertAdjacentHTML('afterbegin',`<div id="filas">${div2.innerHTML}</div>`);
+        div2.html(`<div id="filas">${div2.text()}</div>`).insertAfter(section2);
+        //section2.insertAdjacentHTML('afterbegin',`<div id="filas">${div2.innerHTML}</div>`);
     }
 
     const comprobarVictoria=function(e){
         
         let $lineas=devolverLineas();
         let arrayLineas=[];
+
         for($linea of $lineas){
             arrayLineas.push($linea.css("background-color"));
             if($linea.css("background-color")=="rgb(255, 255, 255)") return
-            //if(linea.style.backgroundColor=="") return  
         }
 
         let bolas=MasterMind.comprobarConcidencia(arrayLineas);
@@ -151,7 +141,7 @@
         addNewLine();
 
         intentos++;
-        $("#contador").html="Intentos: "+intentos;
+        $("#contador").text(()=>"Intentos: "+intentos);
     }
 
     const colorearTablero=function(){
@@ -160,7 +150,6 @@
         
         for(let i=0;i<linea.length;i++){
             if(linea[i].css("background-color")=="rgb(255, 255, 255)"){
-                console.log($color)
                 linea[i].css("background-color",$color);
                 break;
             }
@@ -169,11 +158,11 @@
     }
 
     const pintarBolitas=function(bolas){
-        let $bolitas=$(".bolitas");
+        $bolitas=$(".bolitas");
         if(bolas.bolasNegras==0 && bolas.bolasBlancas==0) return 
         let bolitasActuales=[];
 
-        for(let i=0;i<$bolitas.size();i++){
+        for(let i=0;i<$bolitas.length;i++){
             if($bolitas[i].hasClass("actual")){
                 bolitasActuales.push($bolitas[i]);
             }
