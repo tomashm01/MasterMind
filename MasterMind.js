@@ -4,7 +4,7 @@
     */
     let MasterMind=(function(){
 
-        const arrayColores=["red","blue","green","yellow","orange","purple","pink","black"];
+        const arrayColores=["rgb(255, 0, 0)","rgb(0, 0, 255)","rgb(0, 128, 0)","rgb(255, 255, 0)","rgb(255, 165, 0)","rgb(128, 0, 128)","rgb(255, 192, 203)","rgb(0, 0, 0)"];
         let intentoUsuario;
 
         const init=function(){
@@ -32,7 +32,7 @@
             }catch(e){
                 combinacionUsuario.forEach(function(elemento) {
                     if (combinacionGanadora.indexOf(elemento) != -1) bolasBlancas++;
-                    let indice = combinacionGanadora.indexOf(elemento.style.backgroundColor);
+                    let indice = combinacionGanadora.indexOf(elemento);
                     if (indice != -1) {
                         bolasBlancas++;
                         combinacionGanadora[indice] = "";
@@ -55,6 +55,7 @@
                 });
             }catch(e){
                 combinacionUsuario.forEach(function(elemento, indice) {
+                    console.log(combinacionGanadora[indice]);
                     if (elemento== combinacionGanadora[indice]){
                         bolasNegras++;
                         combinacionGanadora[indice] = "";

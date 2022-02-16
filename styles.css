@@ -87,3 +87,27 @@ main{
     background-color: rgba(189, 132, 132, 0.5);
     border-radius: 10px;
 }
+
+@media screen and (max-width: 700px){
+
+    #botones{
+        width:100%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    #interfaz{
+        width:100%;
+        display:flex;
+        flex-wrap: wrap;
+    }
+    main{
+        display:flex;
+        flex-direction: column;
+    }
+    #listaBolas{
+        display:flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+    }
+}

@@ -7,22 +7,22 @@
 
     const init=function(e){
 
-        let bolas=document.querySelectorAll(".bolas");
-        let ganar=document.getElementById("ganar");
-        let reset=document.getElementById("reset");
-        document.getElementById("contador").innerHTML="Intentos: "+intentos;
+        let $bolas=$(".bolas");
+        let $ganar=$("#ganar");
+        let $reset=$("#reset");
+        $("#contador").html="Intentos "+ intentos;
+        //document.getElementById("contador").innerHTML="Intentos: "+intentos;
 
         MasterMind.init();
 
-        reset.addEventListener("click",resetear);
-        ganar.addEventListener("click",comprobarVictoria);
+        $reset.on("click",resetear);
+        $ganar.on("click",comprobarVictoria);
         
-        bolas.forEach(elemento=>{
+        $bolas.each(function(){
 
             //Colorear y pintar las bolas
-            pintarBolas.bind(elemento)();
-
-            elemento.addEventListener("click",actualizarLinea.bind(elemento));            
+            pintarBolas.bind($(this))();
+            $(this).click(actualizarLinea.bind($(this)));                
         });
         
     }
@@ -59,21 +59,21 @@
     }
 
     const actualizarLinea=function(){
-        
-        if(this.classList.contains("bola1")|| this.classList.contains("bola2")|| this.classList.contains("bola3")|| this.classList.contains("bola4")){ //Reset bola al clickar
-            this.style.backgroundColor="";
-        }else if(this.classList.contains("bolaLateral")){ //Colorear bola al clickar
-            colorearTablero.bind(this)();
+        if($(this).hasClass("bola1") || $(this).hasClass("bola2")|| $(this).hasClass("bola3")|| $(this).hasClass("bola4")){
+            $(this).css("backgroundColor","");
+        }else if($(this).hasClass("bolaLateral")){
+            colorearTablero.bind($(this))();
         }
     }
 
     const devolverLineas=function(){
-        let bolas=document.querySelectorAll(".bolas");
+        let $bolas=$(".bolas");
         let linea=[];
         let posicion=0;
-        bolas.forEach((elemento)=>{
-            if(elemento.classList.contains("bola1") || elemento.classList.contains("bola2") || elemento.classList.contains("bola3")|| elemento.classList.contains("bola4")){ //Reset bola al clickar
-                linea[posicion]=elemento;
+
+        $bolas.each(function(){
+            if($(this).hasClass("bola1")|| $(this).hasClass("bola2") || $(this).hasClass("bola3")|| $(this).hasClass("bola4")){ //Reset bola al clickar
+                linea[posicion]=$(this);
                 posicion++;
             }
         });
@@ -130,11 +130,15 @@
 
     const comprobarVictoria=function(e){
         
-        let lineas=devolverLineas();
-        for(linea of lineas){
-            if(linea.style.backgroundColor=="") return  
+        let $lineas=devolverLineas();
+        let arrayLineas=[];
+        for($linea of $lineas){
+            arrayLineas.push($linea.css("background-color"));
+            if($linea.css("background-color")=="rgb(255, 255, 255)") return
+            //if(linea.style.backgroundColor=="") return  
         }
-        let bolas=MasterMind.comprobarConcidencia(lineas);
+
+        let bolas=MasterMind.comprobarConcidencia(arrayLineas);
         pintarBolitas(bolas);
 
         if(bolas.bolasNegras==4){
@@ -147,17 +151,17 @@
         addNewLine();
 
         intentos++;
-        document.getElementById("contador").innerHTML="Intentos: "+intentos;
+        $("#contador").html="Intentos: "+intentos;
     }
 
     const colorearTablero=function(){
-        let color=this.style.backgroundColor;
-        
+        let $color=$(this).css("background-color");
         let linea=devolverLineas();
         
         for(let i=0;i<linea.length;i++){
-            if(linea[i].style.backgroundColor==""){
-                linea[i].style.backgroundColor=color;
+            if(linea[i].css("background-color")=="rgb(255, 255, 255)"){
+                console.log($color)
+                linea[i].css("background-color",$color);
                 break;
             }
         }
@@ -165,13 +169,13 @@
     }
 
     const pintarBolitas=function(bolas){
-        let bolitas=document.querySelectorAll(".bolitas");
+        let $bolitas=$(".bolitas");
         if(bolas.bolasNegras==0 && bolas.bolasBlancas==0) return 
         let bolitasActuales=[];
 
-        for(let i=0;i<bolitas.length;i++){
-            if(bolitas[i].classList.contains("actual")){
-                bolitasActuales.push(bolitas[i]);
+        for(let i=0;i<$bolitas.size();i++){
+            if($bolitas[i].hasClass("actual")){
+                bolitasActuales.push($bolitas[i]);
             }
         }
         let posicion=0;
@@ -191,8 +195,8 @@
     }
 
     const pintarBolas=function(){
-        this.style.backgroundColor=this.id;
+        $(this).css("background",$(this).attr("id"))
     }
-    
-    document.addEventListener("DOMContentLoaded", init);
+    $(document).ready(init);
+
 }
